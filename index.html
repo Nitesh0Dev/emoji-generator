@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Emoji Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .emoji-display {
+      font-size: 5rem;
+      margin: 20px 0;
+    }
+
+    .btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎲 Random Emoji Generator 🎉</h1>
+    <div class="emoji-display" id="emojiDisplay">😊</div>
+    <button class="btn" id="generateBtn">Generate Emoji</button>
+    <button class="btn" id="copyBtn">Copy Emoji</button>
+    <div class="message" id="copyMessage"></div>
+  </div>
+
+  <script>
+    const emojiList = [
+      "😀", "😂", "🤣", "😎", "😍", "🤩", "😜", "😡", "😱", "🥳",
+      "😴", "🤓", "👻", "🎃", "🤖", "🐶", "🐱", "🦄", "🐼", "🐧",
+      "🍕", "🍔", "🍎", "🍩", "⚽", "🏀", "🎸", "🚗", "✈️", "🚀"
+    ];
+
+    const emojiDisplay = document.getElementById('emojiDisplay');
+    const generateBtn = document.getElementById('generateBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyMessage = document.getElementById('copyMessage');
+
+    // Generate a random emoji
+    generateBtn.addEventListener('click', () => {
+      const randomIndex = Math.floor(Math.random() * emojiList.length);
+      emojiDisplay.textContent = emojiList[randomIndex];
+      copyMessage.textContent = ''; // Clear any previous copy message
+    });
+
+    // Copy the emoji to the clipboard
+    copyBtn.addEventListener('click', () => {
+      const emoji = emojiDisplay.textContent;
+      navigator.clipboard.writeText(emoji).then(() => {
+        copyMessage.textContent = 'Emoji copied to clipboard!';
+        setTimeout(() => copyMessage.textContent = '', 2000); // Clear the message after 2 seconds
+      }).catch(err => {
+        copyMessage.textContent = 'Failed to copy emoji.';
+        console.error('Copy failed: ', err);
+      });
+    });
+  </script>
+</body>
+</html>
